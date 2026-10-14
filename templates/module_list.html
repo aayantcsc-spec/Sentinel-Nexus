@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} | Sentinel Nexus{% endblock %}
+{% block page_heading %}{{ title }}{% endblock %}
+{% block content %}
+<div class="panel">
+  <div class="panel-heading">
+    <div><p class="eyebrow">{{ eyebrow }}</p><h3>{{ records|length }} record{{ records|length|pluralize }}</h3></div>
+    <a class="btn btn-primary btn-sm" href="{% url create_url %}">+ Add record</a>
+  </div>
+  {% if title == "Employees" %}
+  <form class="mb-3 d-flex gap-2" method="get"><input name="q" value="{{ query }}" class="form-control" placeholder="Search name, ID or phone"><button class="btn btn-outline-secondary">Search</button></form>
+  {% endif %}
+  <div class="table-responsive"><table class="table align-middle">
+    <thead><tr>{% for column in columns %}<th>{{ column|cut:"_"|title }}</th>{% endfor %}</tr></thead>
+    <tbody>{% for record in records %}<tr>
+      {% for column in columns %}<td>
+        {% if column == "employee_id" %}<a href="{% url 'employee_detail' record.pk %}">{{ record.employee_id }}</a>
+        {% elif column == "full_name" %}{{ record.full_name }}
+        {% elif column == "designation" %}{{ record.designation|default:"—" }}
+        {% elif column == "site" %}{{ record.site|default:"—" }}
+        {% elif column == "status" %}{{ record.get_status_display|default:"—" }}
+        {% elif column == "sku" %}{{ record.sku }}
+        {% elif column == "name" %}{{ record.name }}
+        {% elif column == "category" %}{{ record.category }}
+        {% elif column == "size" %}{{ record.size|default:"—" }}
+        {% elif column == "quantity_on_hand" %}{{ record.quantity_on_hand }}
+        {% elif column == "minimum_stock" %}{{ record.minimum_stock }}
+        {% elif column == "employee" %}{{ record.employee.full_name }}
+        {% elif column == "item" %}{{ record.item.name }}
+        {% elif column == "quantity" %}{{ record.quantity }}
+        {% elif column == "issue_date" %}{{ record.issue_date }}
+        {% endif %}
+      </td>{% endfor %}
+    </tr>{% empty %}<tr><td colspan="6" class="text-muted py-4">{{ empty }}</td></tr>{% endfor %}</tbody>
+  </table></div>
+  {% if title == "Inventory" %}<a href="{% url 'issue_register' %}" class="btn btn-outline-secondary btn-sm">View employee issue register</a>{% endif %}
+</div>
+{% endblock %}

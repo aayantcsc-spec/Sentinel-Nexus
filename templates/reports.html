@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Reports | Sentinel Nexus{% endblock %}
+{% block page_heading %}Reports{% endblock %}
+{% block content %}
+<div class="row g-3 mb-4">{% for label, value in report_cards %}<div class="col-6 col-xl-3"><div class="metric-card"><div class="metric-label">{{ label }}</div><div class="metric-value">{{ value }}</div></div></div>{% endfor %}</div>
+<div class="panel"><div class="panel-heading"><div><p class="eyebrow">Live database summary</p><h3>Department headcount</h3></div></div><table class="table"><tr><th>Department</th><th>Employees</th></tr>{% for row in department_counts %}<tr><td>{{ row.department__name|default:"Unassigned" }}</td><td>{{ row.total }}</td></tr>{% empty %}<tr><td colspan="2" class="text-muted">No employee data yet.</td></tr>{% endfor %}</table></div>
+{% endblock %}

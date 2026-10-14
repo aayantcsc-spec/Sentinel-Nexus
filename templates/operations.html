@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Operations | Sentinel Nexus{% endblock %}
+{% block page_heading %}Operations{% endblock %}
+{% block content %}
+<div class="row g-3"><div class="col-lg-5"><div class="panel"><div class="panel-heading"><div><p class="eyebrow">Phase 4</p><h3>Today's attendance</h3></div><a href="{% url 'attendance_create' %}" class="btn btn-primary btn-sm">Record</a></div><table class="table"><tr><th>Employee</th><th>Status</th></tr>{% for item in attendance %}<tr><td>{{ item.employee.full_name }}</td><td>{{ item.get_status_display }}</td></tr>{% empty %}<tr><td colspan="2" class="text-muted">No attendance recorded today.</td></tr>{% endfor %}</table></div></div><div class="col-lg-7"><div class="panel"><div class="panel-heading"><div><p class="eyebrow">Work management</p><h3>Work orders</h3></div><a href="{% url 'workorder_create' %}" class="btn btn-primary btn-sm">+ New order</a></div><table class="table"><tr><th>Title</th><th>Site</th><th>Status</th></tr>{% for order in orders %}<tr><td>{{ order.title }}</td><td>{{ order.site }}</td><td>{{ order.get_status_display }}</td></tr>{% empty %}<tr><td colspan="3" class="text-muted">No work orders.</td></tr>{% endfor %}</table><a href="{% url 'site_create' %}" class="btn btn-outline-secondary btn-sm">Add site</a></div></div></div>
+{% endblock %}
