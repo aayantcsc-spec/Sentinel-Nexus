@@ -11,6 +11,10 @@ Phase 1 foundation for the Sentinel Security & Integrated Facility Management Sy
 - Initial role groups for the planned access-control model.
 - SQLite development database, ready to migrate to MySQL or SQL Server later.
 
+Initial role groups: Super Admin, HR Manager, HR Executive, Store Manager,
+Storekeeper, Site Supervisor, Operations Manager, Finance Manager, Safety
+Officer, Client Manager, Employee and Auditor.
+
 ## Run on Windows PowerShell
 
 ```powershell
